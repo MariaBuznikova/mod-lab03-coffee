@@ -1,30 +1,25 @@
 #include "Automata.h"
 #include <iostream>
-
 Automata::Automata() {
     int cash = 0;
-    menu = { "Чай черный", "Чай зеленый", "Капучинно", "Какао", "Латте", "Горячий шоколад", "Американо" };
+    menu = { "Р§Р°Р№ С‡РµСЂРЅС‹Р№", "Р§Р°Р№ Р·РµР»РµРЅС‹Р№", "РљР°РїСѓС‡РёРЅРЅРѕ", "РљР°РєР°Рѕ", "Р›Р°С‚С‚Рµ", "Р“РѕСЂСЏС‡РёР№ С€РѕРєРѕР»Р°Рґ", "РђРјРµСЂРёРєР°РЅРѕ" };
     prices = { 50, 50, 150, 120, 160, 150, 150 };
     state = OFF;
 }
-
 void Automata::on() {
     if (state == STATES::OFF) state = STATES::ON;
 }
-
 void  Automata::off() {
     if (state == STATES::ON) state = STATES::OFF;
 }
-
 void  Automata::coin(int sum) {
     if (state == STATES::ON) cash += sum;
 }
-
 std::vector<std::string> Automata::getMenu() {
     std::vector <std::string> mp;
     for (int i = 0; i < menu.size(); i++) {
         mp.push_back(menu[i] + " - "
-            + std::to_string(prices[i]) + "руб.");
+            + std::to_string(prices[i]) + "Г°ГіГЎ.");
     }
     for (int i = 0; i < mp.size(); i++)
     {
@@ -32,28 +27,26 @@ std::vector<std::string> Automata::getMenu() {
     }
     return mp;
 }
-
 void  Automata::getState() {
-    std::cout << "Текущее состояние: ";
+   std::cout << "РўРµРєСѓС‰РµРµ СЃРѕСЃС‚РѕСЏРЅРёРµ: ";
     switch (state) {
     case STATES::OFF:
-        std::cout << "Выключен" << std::endl;
+        std::cout << "Р’С‹РєР»СЋС‡РµРЅ" << std::endl;
         break;
     case STATES::ON:
-        std::cout << "Включен" << std::endl;
+        std::cout << "Р’РєР»СЋС‡РµРЅ" << std::endl;
         break;
     case STATES::SELECTED:
-        std::cout << "Выбран напиток" << std::endl;
+        std::cout << "Р’С‹Р±СЂР°РЅ РЅР°РїРёС‚РѕРє" << std::endl;
         break;
     case STATES::WAITING:
-        std::cout << "Ожидание оплаты" << std::endl;
+        std::cout << "РћР¶РёРґР°РЅРёРµ РѕРїР»Р°С‚С‹" << std::endl;
         break;
     case STATES::COOKING:
-        std::cout << "Приготовление напитка" << std::endl;
+        std::cout << "РџСЂРёРіРѕС‚РѕРІР»РµРЅРёРµ РЅР°РїРёС‚РєР°" << std::endl;
         break;
     }
 }
-
 void  Automata::choice(int index) {
     if (state == STATES::ON) {
         if (index >= 0 && index < 7) {
@@ -67,29 +60,24 @@ bool  Automata::check(int index) {
         return true;
     }
     else {
-        std::cout << "Недостаточно средств" << std::endl;
+        std::cout << "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ СЃСЂРµРґСЃС‚РІ" << std::endl;
         return false;
     }
 }
-
 void  Automata::cook() {
     if (state == WAITING) {
         state = COOKING;
-        // Процесс приготовления напитка
     }
 }
-
 void  Automata::finish() {
     if (state == COOKING) {
         state = FINISH;
-        std::cout << "Завершение работы";
-        // Завершение обслуживания
     }
 }
 
 void  Automata::cancel() {
     if (state == SELECTED || state == WAITING || state == COOKING) {
         state = ON;
-        // Логика отмены заказа
+        // Г‹Г®ГЈГЁГЄГ  Г®ГІГ¬ГҐГ­Г» Г§Г ГЄГ Г§Г 
     }
 }
