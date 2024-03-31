@@ -1,5 +1,4 @@
 // Copyright 2022 GHA Test Team
-
 #include <gtest/gtest.h>
 #include "Automata.h"
 #include <sstream>
@@ -48,7 +47,6 @@ TEST(correct_transition, test6) {
     coffee.coin(150);
     coffee.choice(1);
     coffee.check(1);
-
     EXPECT_EQ(ACCEPT, coffee.getState());
 }
 
@@ -59,7 +57,6 @@ TEST(correct_transition, test7) {
     coffee.choice(1);
     coffee.check(1);
     coffee.cook();
-
     EXPECT_EQ(ACCEPT, coffee.getState());
 }
 
@@ -71,7 +68,6 @@ TEST(correct_transition, test8) {
     coffee.check(1);
     coffee.cook();
     coffee.finish();
-
     EXPECT_EQ(ACCEPT, coffee.getState());
 }
 
